@@ -1,7 +1,6 @@
 defmodule FrontendChallengeWeb.Components.Employee do
   use Surface.Component
 
-  alias FrontendChallenge.DBmanager
 
   prop(charge, :string)
   prop(i, :integer)

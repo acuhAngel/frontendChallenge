@@ -10,24 +10,27 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
     ~F"""
     <div>
       {#for employee <- @employees}
-        <div class="manager">
+
           {#if employee.parent_id |> is_nil}
+          <div class="manager">
             <MenuManager id={employee.id}>
               {employee.charge} {employee.id}
             </MenuManager>
             {#for emp <- DBmanager.getEmployees(employee.id)}
               {#if emp.charge != :manager}
                 <div>
-                  {emp.parent_id}<Employee charge={emp.charge} i={emp.id} salary={emp.salary} id={emp.id} />
+                  <Employee charge={emp.charge} i={emp.id} salary={emp.salary} id={emp.id} />
                 </div>
               {#elseif emp.charge == :manager}
-                <div >
+                <div>
                   <RecursiveManager padre={emp.id} id={emp.id} />
                 </div>
               {/if}
             {/for}
+            TOTAL {employee.salary_team}
+            </div>
           {/if}
-        </div>
+
       {#else}
         No data
       {/for}
@@ -95,7 +98,7 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
     }
   end
 
-  def handle_event("root_man", %{"value" => id}, socket) do
+  def handle_event("root_man", _, socket) do
     DBmanager.add(nil, :manager, 300)
 
     {

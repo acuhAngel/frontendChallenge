@@ -10,30 +10,46 @@ defmodule FrontendChallengeWeb.Components.RecursiveManager do
   def render(assigns) do
     ~F"""
     <div class="manager">
-    manager {@padre}
-    <button :on-click="load" value={@padre}>
-      Load
-    </button>
-    <br>
-    <button :on-click={"add_man", target: "#tree"} value={@padre}>
-      manager
-    </button>
-    <button :on-click={"add_dev", target: "#tree"} value={@padre}>
-      developer
-    </button>
-    <button :on-click={"add_qa", target: "#tree"} value={@padre}>
-      tester
-    </button>
-
-    {#for emp <- @employees}
-      {#if emp.charge == :manager}
-      {render(%{__context__: %{}, employees: DBmanager.getEmployees(emp.id), padre: emp.id, id: emp.id, myself: ""})}
-      {#else}
-      {emp.parent_id}<Employee charge={emp.charge} i={emp.id} salary={emp.salary} id={emp.id} />
-      {/if}
-    {#else}
-      NODATA reload or add one employee
-    {/for}
+      <div>
+        manager {@padre}
+        <button :on-click="load" value={@padre}>
+          Load
+        </button>
+        <br>
+        <button :on-click={"del", target: "#tree"} value={@id}>
+          delete
+        </button>
+        <button :on-click={"add_man", target: "#tree"} value={@padre}>
+          manager
+        </button>
+        <button :on-click={"add_dev", target: "#tree"} value={@padre}>
+          developer
+        </button>
+        <button :on-click={"add_qa", target: "#tree"} value={@padre}>
+          tester
+        </button>
+      </div>
+      <div>
+        {#for emp <- @employees}
+          <div>
+            {#if emp.charge == :manager}
+              <div>
+                {render(%{
+                  __context__: %{},
+                  employees: DBmanager.getEmployees(emp.id),
+                  padre: emp.id,
+                  id: emp.id,
+                  myself: ""
+                })}
+              </div>
+            {#else}
+              <Employee charge={emp.charge} i={emp.id} salary={emp.salary} id={emp.id} />
+            {/if}
+          </div>
+        {/for}
+        TOTAL {DBmanager.getTotal(@padre)}
+      </div>
+      <br>
     </div>
     """
   end
