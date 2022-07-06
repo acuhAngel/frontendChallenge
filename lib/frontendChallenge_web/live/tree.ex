@@ -6,16 +6,16 @@ defmodule FrontendChallengeWeb.Tree do
   def render(assigns) do
     ~F"""
     <style>
-    button{
+      button{
       background-color: #D6FFB7;
       color: #080357;
-    }
-    .container{
+      }
+      .container{
       height: auto;
       width: auto;
       background-color: #F5FF90 ;
       padding: 10px;
-    }
+      }
 
       .employee{
       display: felx;

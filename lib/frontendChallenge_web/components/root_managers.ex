@@ -10,16 +10,15 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
     ~F"""
     <div>
       {#for employee <- @employees}
-
-          {#if employee.parent_id |> is_nil}
+        {#if employee.parent_id |> is_nil}
           <div class="manager">
-            <MenuManager id={employee.id}>
-              {employee.charge} {employee.id}
+            <MenuManager this_id={employee.id}>
+              {employee.charge} {employee.id} &nbsp;&nbsp;&nbsp;&nbsp; $ 300 <br>
             </MenuManager>
             {#for emp <- DBmanager.getEmployees(employee.id)}
               {#if emp.charge != :manager}
                 <div>
-                  <Employee charge={emp.charge} i={emp.id} salary={emp.salary} id={emp.id} />
+                  <Employee charge={emp.charge} i={emp.id} salary={emp.salary} />
                 </div>
               {#elseif emp.charge == :manager}
                 <div>
@@ -28,9 +27,8 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
               {/if}
             {/for}
             TOTAL {employee.salary_team}
-            </div>
-          {/if}
-
+          </div>
+        {/if}
       {#else}
         No data
       {/for}
@@ -51,7 +49,7 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
   end
 
   def handle_event("del", %{"value" => id}, socket) do
-    DBmanager.del(id)
+    DBmanager.del(String.to_integer(id))
 
     {
       :noreply,

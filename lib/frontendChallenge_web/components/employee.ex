@@ -1,7 +1,6 @@
 defmodule FrontendChallengeWeb.Components.Employee do
   use Surface.Component
 
-
   prop(charge, :string)
   prop(i, :integer)
   prop(salary, :integer)
