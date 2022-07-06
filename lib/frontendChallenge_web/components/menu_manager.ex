@@ -5,20 +5,19 @@ defmodule FrontendChallengeWeb.Components.MenuManager do
   use Surface.Component
 
   prop this_id, :integer
-  prop charge, :string
   slot default
 
   def render(assigns) do
     ~F"""
-    <section>
-      <div class="box">
-        <div>{@charge}{@this_id}</div>
+    <section class="teamborder">
+      <div class="managerheader">
+        <div>Manager-{@this_id}</div>
         <div> $300 </div>
         <button :on-click={"del", target: "#tree"} value={@this_id}>
           delete team
         </button>
       </div>
-      <div>
+      <div class="box">
         <button :on-click={"add_man", target: "#tree"} value={@this_id}>
           +manager
         </button>

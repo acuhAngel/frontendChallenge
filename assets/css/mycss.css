@@ -15,21 +15,61 @@ button{
 .employee{
     align-items: center;
     display: flex;
-    background-color: #FF9F1C;
+    background-color: #F5FF90;
     justify-content: space-between;
     padding: 10px;
-    margin: 10px;
+    margin-left: 24px;
+    margin-bottom: 8px;
+    border-radius: 4px;
 }
 
 .manager{
-    padding: 5px;
-    border: solid;
-    background: #FFC15E;
-    margin-bottom: 30px;
+    background: #5c5852;
+    margin-bottom: 16px;
+    margin-left: 24px;
+    padding-right: 8px;
+    padding-top: 4px;
 }
 
 .box{
     display: flex;
-    margin: 10px;
+    margin: 24px;
     justify-content: space-between;
+}
+
+.total{
+    display: flex;
+    margin: 10px;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #FE4A49;
+    border-radius: 4px;
+    margin-left: 24px;
+    width: 66%;
+    height: 60px;
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+}
+
+.managerheader{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+    font-size: x-large;
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #2AB7CA;
+    justify-content: space-between;
+    border-radius: 4px ;
+    margin-left: 4px;
+}
+
+
+.teamborder{
+    border-left: 1px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(255, 255, 255);
 }

@@ -2,7 +2,7 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
   use Surface.LiveView
 
   alias FrontendChallenge.DBmanager
-  alias FrontendChallengeWeb.Components.{Employee, MenuManager, RecursiveManager}
+  alias FrontendChallengeWeb.Components.{Total,Employee, MenuManager, RecursiveManager}
 
   data employees, :list, default: []
 
@@ -13,13 +13,13 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
         <div>
           {#if employee.charge == :manager}
             <div class="manager">
-              <MenuManager this_id={employee.id} charge={employee.charge}>
+              <MenuManager this_id={employee.id}>
                 <div>
                 {render(%{
                   __context__: %{},
                   employees: DBmanager.getEmployees(employee.id),
                 })}
-                <div>TOTAL ${employee.salary_team}</div>
+                <Total total={employee.salary_team} />
                 </div>
               </MenuManager>
             </div>
