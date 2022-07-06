@@ -1,0 +1,35 @@
+
+button{
+    color: #080357;
+    background-color: #D6FFB7;
+}
+
+.container{
+
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background-color: #90ffaa ;
+}
+
+.employee{
+    align-items: center;
+    display: flex;
+    background-color: #FF9F1C;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px;
+}
+
+.manager{
+    padding: 5px;
+    border: solid;
+    background: #FFC15E;
+    margin-bottom: 30px;
+}
+
+.box{
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+}

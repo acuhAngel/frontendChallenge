@@ -65,16 +65,6 @@ defmodule FrontendChallenge.DBmanager do
 
   end
 
-  # def getManagers() do
-  #   IO.puts("cargando managers")
-
-  #   Repo.all(
-  #     from e in Employees,
-  #       select: [e.charge, e.salary, e.id],
-  #       where: e.charge == :manager and is_nil(e.parent_id)
-  #   )
-  # end
-
   def getEmployees(id) do
     IO.puts("cargando hijos de #{id}")
 
@@ -107,6 +97,11 @@ defmodule FrontendChallenge.DBmanager do
 
   def getAll() do
     IO.puts("cargando base de datos")
-    Repo.all(from(e in Employees))
+    IO.puts("cargando managers")
+
+    Repo.all(
+      from e in Employees,
+        where: e.charge == :manager and is_nil(e.parent_id)
+    )
   end
 end

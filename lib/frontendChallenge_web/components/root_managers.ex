@@ -10,27 +10,26 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
     ~F"""
     <div>
       {#for employee <- @employees}
-        {#if employee.parent_id |> is_nil}
-          <div class="manager">
-            <MenuManager this_id={employee.id}>
-              {employee.charge} {employee.id} &nbsp;&nbsp;&nbsp;&nbsp; $ 300 <br>
-            </MenuManager>
-            {#for emp <- DBmanager.getEmployees(employee.id)}
-              {#if emp.charge != :manager}
+        <div>
+          {#if employee.charge == :manager}
+            <div class="manager">
+              <MenuManager this_id={employee.id} charge={employee.charge}>
                 <div>
-                  <Employee charge={emp.charge} i={emp.id} salary={emp.salary} />
+                {render(%{
+                  __context__: %{},
+                  employees: DBmanager.getEmployees(employee.id),
+                })}
+                <div>TOTAL ${employee.salary_team}</div>
                 </div>
-              {#elseif emp.charge == :manager}
-                <div>
-                  <RecursiveManager padre={emp.id} id={emp.id} />
-                </div>
-              {/if}
-            {/for}
-            TOTAL {employee.salary_team}
-          </div>
-        {/if}
+              </MenuManager>
+            </div>
+
+          {#elseif employee.charge != :manager}
+            <Employee charge={employee.charge} i={employee.id} salary={employee.salary}/>
+          {/if}
+        </div>
       {#else}
-        No data
+
       {/for}
     </div>
     """
