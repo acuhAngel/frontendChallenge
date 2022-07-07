@@ -49,7 +49,8 @@ defmodule FrontendChallenge.MixProject do
       {:jason, "~> 1.2"},
       {:surface, "~> 0.7.4"},
       {:credo, "~> 1.6"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:excoveralls, "~> 0.14.5"}
     ]
   end
 
