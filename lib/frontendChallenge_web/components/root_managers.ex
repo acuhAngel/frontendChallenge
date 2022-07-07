@@ -2,7 +2,7 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
   use Surface.LiveView
 
   alias FrontendChallenge.DBmanager
-  alias FrontendChallengeWeb.Components.{Total,Employee, MenuManager, RecursiveManager}
+  alias FrontendChallengeWeb.Components.{Total, Employee, MenuManager}
 
   data employees, :list, default: []
 
@@ -14,22 +14,22 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
           {#if employee.charge == :manager}
             <div class="manager">
               <MenuManager this_id={employee.id}>
-                <div>
-                {render(%{
-                  __context__: %{},
-                  employees: DBmanager.getEmployees(employee.id),
-                })}
-                <Total total={employee.salary_team} />
+                <div class="box teamborder">
+                  {render(%{
+                    __context__: %{},
+                    employees: DBmanager.getEmployees(employee.id)
+                  })}
+                  <Total total={employee.salary_team} />
                 </div>
               </MenuManager>
             </div>
-
           {#elseif employee.charge != :manager}
-            <Employee charge={employee.charge} i={employee.id} salary={employee.salary}/>
+            <div>
+              <Employee charge={employee.charge} i={employee.id} salary={employee.salary} />
+            </div>
           {/if}
         </div>
       {#else}
-
       {/for}
     </div>
     """
@@ -47,44 +47,24 @@ defmodule FrontendChallengeWeb.Components.RootManagers do
     }
   end
 
+  def handle_event("add", data, socket) do
+    DBmanager.add(
+      data["id"],
+      data["charge"] |> String.to_atom(),
+      data["salary"] |> String.to_integer()
+    )
+
+    {
+      :noreply,
+      assign(
+        socket,
+        employees: DBmanager.getAll()
+      )
+    }
+  end
+
   def handle_event("del", %{"value" => id}, socket) do
     DBmanager.del(String.to_integer(id))
-
-    {
-      :noreply,
-      assign(
-        socket,
-        employees: DBmanager.getAll()
-      )
-    }
-  end
-
-  def handle_event("add_dev", %{"value" => id}, socket) do
-    DBmanager.add(id, :developer, 1000)
-
-    {
-      :noreply,
-      assign(
-        socket,
-        employees: DBmanager.getAll()
-      )
-    }
-  end
-
-  def handle_event("add_qa", %{"value" => id}, socket) do
-    DBmanager.add(id, :qa_tester, 500)
-
-    {
-      :noreply,
-      assign(
-        socket,
-        employees: DBmanager.getAll()
-      )
-    }
-  end
-
-  def handle_event("add_man", %{"value" => id}, socket) do
-    DBmanager.add(id, :manager, 300)
 
     {
       :noreply,

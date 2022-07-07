@@ -25,7 +25,6 @@ defmodule FrontendChallenge.DBmanager do
   end
 
   def update_parents_salary(parent_id) do
-    parent_id |> IO.inspect()
     parent = Repo.get(Employees, parent_id)
     children_salary = getTotal(parent_id)
     update = Changeset.change(parent, salary_team: children_salary)
@@ -36,57 +35,39 @@ defmodule FrontendChallenge.DBmanager do
     end
   end
 
-
   def del(id) do
     IO.puts("borrando empleado #{id}")
     emp_to_del = Repo.get(Employees, id)
-    Repo.delete(emp_to_del) |> IO.inspect()
+    Repo.delete(emp_to_del)
 
-    if not is_nil emp_to_del.parent_id  do
+    if not is_nil(emp_to_del.parent_id) do
       if not is_nil(Repo.get(Employees, emp_to_del.parent_id)) do
         update_parents_salary(emp_to_del.parent_id)
       end
     end
+
     getEmployees(id)
-    |>Enum.each(fn child ->
+    |> Enum.each(fn child ->
       del(child.id)
     end)
-
-
-    # if emp_to_del.parent_id != nil do
-    #   IO.puts("borrando empleado")
-    #   Repo.delete(emp_to_del)
-    #   update_parents_salary(emp_to_del.parent_id)
-    # else
-    #   IO.puts("borrando root manager")
-    #   Repo.delete_all(from e in Employees, where: e.id == ^id)
-      # borrar hijos
-    # end
-
   end
 
   def getEmployees(id) do
-    IO.puts("cargando hijos de #{id}")
-
-
-    Repo.all(
-      from e in Employees,
-        where: e.parent_id == ^id
-    )
+    Repo.all(from e in Employees, where: e.parent_id == ^id, order_by: e.id)
   end
 
   def getTotal(id) do
     IO.puts("get employee:#{id}  salary:")
+
     s =
       Repo.all(from e in Employees, select: sum(e.salary), where: e.id == ^id)
       |> List.first()
-      |> IO.inspect()
 
     IO.puts("get employee:#{id} children salary")
+
     s2 =
       Repo.all(from e in Employees, select: sum(e.salary_team), where: e.parent_id == ^id)
       |> List.first()
-      |> IO.inspect()
 
     if is_nil(s2) do
       s
@@ -96,12 +77,8 @@ defmodule FrontendChallenge.DBmanager do
   end
 
   def getAll() do
-    IO.puts("cargando base de datos")
-    IO.puts("cargando managers")
-
     Repo.all(
-      from e in Employees,
-        where: e.charge == :manager and is_nil(e.parent_id)
+      from e in Employees, where: e.charge == :manager and is_nil(e.parent_id), order_by: e.id
     )
   end
 end

@@ -1,7 +1,11 @@
-
 button{
     color: #080357;
     background-color: #D6FFB7;
+    width: min-content;
+    height: min-content;
+    padding: 0 2px 0 2px;
+    margin: 0;
+    
 }
 
 .container{
@@ -9,67 +13,111 @@ button{
     width: auto;
     height: auto;
     padding: 10px;
-    background-color: #90ffaa ;
+    /* background-color: #90ffaa ; */
 }
 
 .employee{
+    color: white;
     align-items: center;
     display: flex;
-    background-color: #F5FF90;
     justify-content: space-between;
-    padding: 10px;
-    margin-left: 24px;
-    margin-bottom: 8px;
-    border-radius: 4px;
+    width: 300px;
+
+
 }
 
 .manager{
     background: #5c5852;
-    margin-bottom: 16px;
-    margin-left: 24px;
-    padding-right: 8px;
+    margin-bottom: 2px;
+    justify-content: space-between;
+    width: auto;
     padding-top: 4px;
+    padding-right: 4px;
+
 }
 
 .box{
-    display: flex;
-    margin: 24px;
-    justify-content: space-between;
+    margin-left: 24px;
 }
 
 .total{
     display: flex;
-    margin: 10px;
     align-items: center;
     justify-content: space-around;
-    background-color: #FE4A49;
     border-radius: 4px;
     margin-left: 24px;
-    width: 66%;
-    height: 60px;
+    width: 300px;
+    height: min-content;
     text-align: center;
-    font-size: xx-large;
     color: white;
+    background-color: #FE4A49;
 }
 
 .managerheader{
     display: flex;
     align-items: center;
     color: white;
-    font-weight: 500;
-    font-size: x-large;
-    padding-left: 30px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #2AB7CA;
+    /* padding-left: 24px; */
     justify-content: space-between;
-    border-radius: 4px ;
-    margin-left: 4px;
+    /* border-radius: 4px ;
+    margin-left: 4px; */
 }
 
 
 .teamborder{
+    margin-left: 24px;
     border-left: 1px solid rgb(255, 255, 255);
-    border-bottom: 1px solid rgb(255, 255, 255);
+    
 }
+
+.del{
+    border: none;
+    color: white;
+    background-color: transparent;
+    width: 50px;
+    }
+
+#menu ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+
+
+#menu ul button{
+  width: 120px;
+  display:block;
+  text-decoration:none;
+  font-weight:400;
+  font-size:15px;
+}
+
+#menu ul li {
+  position:relative;
+  float:left;
+  margin:0;
+  padding-top: 5px;
+}
+
+
+#menu ul ul {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  padding:0;
+}
+
+#menu ul ul li {
+  float:none;
+  width:150px
+}
+
+
+#menu ul li:hover > ul {
+  display:block;
+}
+
+
+

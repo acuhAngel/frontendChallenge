@@ -5,6 +5,7 @@ defmodule FrontendChallengeWeb.Components.Total do
 
   use Surface.Component
   prop total, :integer, default: 0
+
   def render(assigns) do
     ~F"""
     <section class="total">
@@ -12,10 +13,9 @@ defmodule FrontendChallengeWeb.Components.Total do
         TOTAL
       </div>
       <div>
-      ${@total}
+        ${@total}
       </div>
     </section>
-<div class="division"> </div>
     """
   end
 end

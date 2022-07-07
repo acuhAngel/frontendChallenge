@@ -5,12 +5,11 @@ defmodule FrontendChallengeWeb.Components.Employee do
   prop(i, :integer)
   prop(salary, :integer)
 
-
   def render(assigns) do
     ~F"""
     <div class="employee">
       <div>
-        {@charge}-{@i}
+        +{@charge}-{@i}
       </div>
       <div>
         ${@salary}
